@@ -123,13 +123,13 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     
     UIView *activityView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, CSToastActivityWidth, CSToastActivityHeight)] autorelease];
     activityView.center = [self centerPointForPosition:position withToast:activityView];
-    activityView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:CSToastOpacity];
+    activityView.backgroundColor = [self colorForToastBackground];
     activityView.alpha = 0.0;
     activityView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     activityView.layer.cornerRadius = CSToastCornerRadius;
     
     if (CSToastDisplayShadow) {
-        activityView.layer.shadowColor = [UIColor blackColor].CGColor;
+        activityView.layer.shadowColor = [self colorForToastShadow].CGColor;
         activityView.layer.shadowOpacity = CSToastShadowOpacity;
         activityView.layer.shadowRadius = CSToastShadowRadius;
         activityView.layer.shadowOffset = CSToastShadowOffset;
@@ -203,13 +203,13 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     wrapperView.layer.cornerRadius = CSToastCornerRadius;
     
     if (CSToastDisplayShadow) {
-        wrapperView.layer.shadowColor = [UIColor blackColor].CGColor;
+        wrapperView.layer.shadowColor = [self colorForToastShadow].CGColor;
         wrapperView.layer.shadowOpacity = CSToastShadowOpacity;
         wrapperView.layer.shadowRadius = CSToastShadowRadius;
         wrapperView.layer.shadowOffset = CSToastShadowOffset;
     }
 
-    wrapperView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:CSToastOpacity];
+    wrapperView.backgroundColor = [self colorForToastBackground];
     
     if(image != nil) {
         imageView = [[[UIImageView alloc] initWithImage:image] autorelease];
@@ -234,7 +234,7 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
         titleLabel.font = [UIFont boldSystemFontOfSize:CSToastFontSize];
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textColor = [self colorForToastText];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.alpha = 1.0;
         titleLabel.text = title;
@@ -250,7 +250,7 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
         messageLabel.numberOfLines = CSToastMaxMessageLines;
         messageLabel.font = [UIFont systemFontOfSize:CSToastFontSize];
         messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        messageLabel.textColor = [UIColor whiteColor];
+        messageLabel.textColor = [self colorForToastText];
         messageLabel.backgroundColor = [UIColor clearColor];
         messageLabel.alpha = 1.0;
         messageLabel.text = message;
@@ -310,6 +310,21 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     }
         
     return wrapperView;
+}
+
+- (UIColor*)colorForToastBackground
+{
+    return [[UIColor blackColor] colorWithAlphaComponent:CSToastOpacity];
+}
+
+- (UIColor*)colorForToastShadow
+{
+    return [UIColor blackColor];
+}
+
+- (UIColor*)colorForToastText
+{
+    return [UIColor whiteColor];
 }
 
 @end
