@@ -231,7 +231,7 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     if (title != nil) {
         titleLabel = [[[UILabel alloc] init] autorelease];
         titleLabel.numberOfLines = CSToastMaxTitleLines;
-        titleLabel.font = [UIFont boldSystemFontOfSize:CSToastFontSize];
+        titleLabel.font = [self fontForToastTitle];
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         titleLabel.textColor = [self colorForToastText];
@@ -248,7 +248,7 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     if (message != nil) {
         messageLabel = [[[UILabel alloc] init] autorelease];
         messageLabel.numberOfLines = CSToastMaxMessageLines;
-        messageLabel.font = [UIFont systemFontOfSize:CSToastFontSize];
+        messageLabel.font = [self fontForToastMessage];
         messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         messageLabel.textColor = [self colorForToastText];
         messageLabel.backgroundColor = [UIColor clearColor];
@@ -325,6 +325,16 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
 - (UIColor*)colorForToastText
 {
     return [UIColor whiteColor];
+}
+
+- (UIFont*)fontForToastTitle
+{
+    [UIFont boldSystemFontOfSize:CSToastFontSize];
+}
+
+- (UIFont*)fontForToastMessage
+{
+    [UIFont systemFontOfSize:CSToastFontSize];
 }
 
 @end
